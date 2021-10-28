@@ -26,8 +26,7 @@ return section;
 function getSkuFromProductItem(item) {
  return item.querySelector('span.item__sku').innerText;
 } 
-// x------------------------------------------------------------ Requisitos----------------------------------------------------------------------------x
-// Renderiza os items do requisito 1
+
 async function getProducts() {
   const query = 'computador';
  const apiUrl = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${query}`);
@@ -35,26 +34,24 @@ async function getProducts() {
  const responseJson = await data.results;
  return responseJson;
 }
-// Requisicao para o requisito 2
 async function getID(id) {
  const apiUrl = await fetch(`https://api.mercadolibre.com/items/${id}`);
  const data = await apiUrl.json();
  return data;
 }
 
-// Requisito 7 - Tela de loading
 const loading = () => {
   const span = document.createElement('span');
   span.className = 'loading';
   span.innerHTML = 'loading...';
   document.body.appendChild(span);
  };
-// Requisito 7 - Remove tela de loading
+
  const removeLoading = () => {
    document.querySelector('.loading').remove();
  };
 
-// Requisito 1
+
 async function renderProducts() {
   loading();
   const itemProds = await getProducts();
@@ -67,13 +64,13 @@ async function renderProducts() {
   removeLoading();
  }
  
- // Requisito 4
+
 function addLocalStorage() {
   const content = document.querySelector('ol').innerHTML;
   localStorage.setItem('produto', content);
  }
  
-// Requisito 5
+
 async function totalPrice() {
  const priceCart = document.querySelectorAll('.cart__item');
  let priceInic = 0;
@@ -87,7 +84,7 @@ async function totalPrice() {
  total.innerHTML = priceInic;
 }
 
-// Requisito 6
+
 function removeItemsFromList() {
   const buttonRemoveItems = document.querySelector('.empty-cart');
   buttonRemoveItems.addEventListener('click', () => {
@@ -96,7 +93,7 @@ function removeItemsFromList() {
   });
  }
 
-// Requisito 3
+
 function cartItemClickListener(event) {
   event.target.remove('');
   totalPrice();
@@ -112,7 +109,7 @@ function createCartItemElement({ sku, name, salePrice }) {
 }
 document.querySelector('ol').innerHTML = localStorage.getItem('produto');
 
-// Requisito 2 = 
+
 function addCart() {
  const buttons = document.querySelectorAll('.item__add');
 buttons.forEach((btn) => {
@@ -136,5 +133,3 @@ window.onload = async function onload() {
  removeItemsFromList();
  totalPrice();
 };
-
-// Codigo do meu repositorio que fiz quando estava em outra turma: https://github.com/tryber/sd-011-project-shopping-cart/pull/192
